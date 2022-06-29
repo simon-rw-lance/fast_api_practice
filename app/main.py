@@ -16,9 +16,30 @@ async def home(request: Request):
     }
     return templates.TemplateResponse("page.html", {"request": request, "data": data})
 
+@app.get("/contact", response_class=HTMLResponse)
+async def contact(request: Request):
+    data = {
+        "name": "Simon R. W. Lance",
+        "email": "simon.rw.lance@gmail.com",
+        "github": "https://github.com/simon-rw-lance"
+    }
+    return templates.TemplateResponse("contact.html", {"request": request, "data": data})
+
 @app.get("/page/{page_name}", response_class=HTMLResponse)
 async def page(request: Request, page_name: str):
     data = {
         "page": page_name
     }
     return templates.TemplateResponse("page.html", {"request": request, "data": data})
+
+@app.get("/phd/{page_name}", response_class=HTMLResponse)
+async def phd(request : Request, page_name: str):
+    if page_name == "about":
+        return templates.TemplateResponse("phd/about.html", {"request": request})
+    elif page_name == "convection":
+        return templates.TemplateResponse("phd/convection.html", {"request": request})
+    elif page_name == "planets":
+        return templates.TemplateResponse("phd/planets.html", {"request": request})
+
+from app.routers import wow_tools
+app.include_router(wow_tools.router)

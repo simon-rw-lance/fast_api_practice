@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block head %}
+{{ super() }}
+
+{% endblock %}
+
+{% block page_content %}
+{% include 'include/sidebar.html' %}
+<h1>
+    {% if data.character is not none %}
+      {{data.character}}
+    {% else %}
+      {{data}}
+    {% endif %}
+</h1>
+
+<body>
+<form method="post">
+    <input type="text" name="character" value="Character"/>
+    <input type="text" name="realm" value="Realm"/>
+    <input type="text" name="region" value="Region"/>
+    <input type="submit">
+</form>
+
+
+<p>Character: {{ data.character }}</p>
+<p>Realm: {{ data.realm }}</p>
+<p>Region: {{ data.region }}</p>
+
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+
+
+{% endblock %}
